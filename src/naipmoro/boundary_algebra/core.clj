@@ -24,7 +24,7 @@
           (recur (conj in frst) out (rest coll))
           (recur in (conj out frst) (rest coll)))))))
 
-;; equiv? is a 2-arity equivalence predicate
+;; pred is a 2-arity equivalence predicate
 (defn equivalence-classes [pred coll]
   (loop [classes [], coll coll]
     (if (empty? coll)
@@ -188,7 +188,9 @@
   (commutative? [this] "Tests commutativity of the operation")
   (associative? [this] "Tests associativity of the operation")
   (isomorphic? [this other] "Tests whether two operations are isomorphic")
-  (group? [this] "Tests whether the operation represents a group"))
+  (group? [this] "Tests whether the operation represents a group")
+  (idempotent? [this] "Tests whether p p = p for all p")
+  (void? [this] "Tests whether p p = 0 for all p"))
 
 (defn normal-form
   [matrix]
@@ -315,6 +317,20 @@
               (recur (rest pmaps))
               ))))))
   (group? [matrix] (and (associative? matrix) (latin-square? matrix)))
+  (idempotent? [matrix]
+    (loop [n (dec (m/row-count matrix))]
+      (if (zero? n)
+        true
+        (if-not (= (m/mget matrix n n) (double n))
+          false
+          (recur (dec n))))))
+  (void? [matrix]
+    (loop [n (dec (m/row-count matrix))]
+      (if (zero? n)
+        true
+        (if-not (zero? (m/mget matrix n n))
+          false
+          (recur (dec n))))))
 
   BoundaryAlgebra
   (isomorphic? [algebra algebra2]
