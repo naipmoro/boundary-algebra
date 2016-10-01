@@ -192,6 +192,10 @@
   (idempotent? [this] "Tests whether p p = p for all p")
   (void? [this] "Tests whether p p = 0 for all p"))
 
+(defprotocol Algebra
+  "Protocol for algebras"
+  (brownian? [this] "Tests whether algebra is brownian"))
+
 (defn normal-form
   [matrix]
   (let [m (m/matrix matrix)
@@ -277,7 +281,7 @@
       (m/set-selection! m i j (pmap v 0)))
     (normal-form m)))
 
-(defrecord BoundaryAlgebra [juxtaposition inclusion])
+
 
 (extend-protocol BoundaryOperation
   clojure.lang.Sequential
@@ -330,12 +334,13 @@
         true
         (if-not (zero? (m/mget matrix n n))
           false
-          (recur (dec n))))))
+          (recur (dec n)))))))
 
-  BoundaryAlgebra
+(defrecord BoundaryAlgebra [juxtaposition inclusion]
+  BoundaryOperation
   (isomorphic? [algebra algebra2]
     (assert (= (m/shape (:inclusion algebra)) (m/shape (:inclusion algebra2)))
-            "The dimensions of the 2 algebra are not equal.")
+            "The dimensions of the 2 algebras are not equal.")
     (let [incl (:inclusion algebra)
           incl2 (:inclusion algebra2)
           juxt (:juxtaposition algebra)
@@ -351,7 +356,12 @@
                      (m/equals juxt (permute-table juxt2 pmap)))
               (zipmap (map int (keys pmap)) (vals pmap))
               (recur (rest pmaps))
-              )))))))
+              ))))))
+
+  Algebra
+  (brownian? [algebra]
+    (and (idempotent? (:juxtaposition algebra))
+         (void? (:inclusion algebra)))))
 
 (defn isomorphs
   "Given a collection of matrices, returns a vector of vectors,
