@@ -1,7 +1,8 @@
 (ns naipmoro.boundary-algebra.core
   (:require [clojure.math.combinatorics :as combo]
             [clojure.core.reducers :as r]
-            [clojure.core.matrix :as m])
+            [clojure.core.matrix :as m]
+            [clojure.spec :as s])
   (:refer-clojure :exclude [associative?]))
 
 (comment
@@ -15,17 +16,28 @@
 (m/set-current-implementation :vectorz)
 
 (defn- separate
-  [equiv? e coll]
+  "Given a 2-arity pred, an element e, and a coll, returns 
+   a vector of 2 vectors: the first vector will include e 
+   and all elements x in coll that satisfy (pred e x); the 
+   second vector will include all elements y of coll that 
+   fail to satisfy (pred e y).
+   (separate = 1 [2 1 3 1 1 4 4]) => [[1 1 1 1] [2 3 4 4]]
+   (separate = 1 []) => [[1] []]
+   (separate = 1 [1]) => [[1 1] []]
+   (separate = 1 [2]) => [[1] [2]]"
+  [pred e coll]
   (loop [in [e], out [], coll coll]
     (if (empty? coll)
       [in out]
       (let [frst (first coll)]
-        (if (equiv? e frst)
+        (if (pred e frst)
           (recur (conj in frst) out (rest coll))
           (recur in (conj out frst) (rest coll)))))))
 
-;; pred is a 2-arity equivalence predicate
 (defn equivalence-classes [pred coll]
+  "Given a 2-arity equivalence predicate pred and coll, returns 
+   a vector of vectors, each vector containing equivalent elements 
+   of coll."
   (loop [classes [], coll coll]
     (if (empty? coll)
       classes
@@ -48,6 +60,11 @@
 
 (def _ nil)
 
+(def template-2i      [ [0 1]
+                        [1 _] ])
+
+(def template-2j      [ [0 1]
+                        [1 _] ])
 
 (def template-3i-void [ [0  1  2]
                         [1  0  _]
@@ -404,8 +421,7 @@
         ts (for [r rules]
              (m/matrix (fill temp r)))
         ass (filter associative? ts)
-        isos (isomorphs ass)]
-    )
+        isos (isomorphs ass)])
 
   (let [temp (->InclTemplate template-3i)
         ps (perms temp)

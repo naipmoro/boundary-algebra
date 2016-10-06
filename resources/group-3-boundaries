@@ -15,7 +15,7 @@
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 1] [2 1 2]], 
-     :inclusion [[0 1 2] [1 2 0] [2 0 1]]}      *complete
+     :inclusion [[0 1 2] [1 2 0] [2 0 1]]}      
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 2] [2 2 2]], 
      :inclusion [[0 1 2] [1 2 0] [2 0 1]]}] 

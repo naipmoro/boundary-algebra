@@ -11,7 +11,7 @@
      :inclusion [[0 1 2] [1 1 1] [2 1 0]]} 
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 1] [2 1 0]], 
-     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}]     *
+     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}]     
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 0 2] [2 2 2]], 
@@ -26,6 +26,20 @@
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 1] [2 1 0]], 
      :inclusion [[0 1 2] [1 1 2] [2 2 2]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 0 2] [2 2 2]], 
+     :inclusion [[0 1 2] [1 1 1] [2 2 2]]} 
+#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 1 1] [2 1 0]], 
+     :inclusion [[0 1 2] [1 1 1] [2 2 2]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 0 2] [2 2 2]], 
+     :inclusion [[0 1 2] [1 1 2] [2 1 2]]} 
+#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 1 1] [2 1 0]], 
+     :inclusion [[0 1 2] [1 1 2] [2 1 2]]}] 
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 0 2] [2 2 2]], 
@@ -64,7 +78,7 @@
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 1] [2 1 1]], 
-     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}      *
+     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}      
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 2 2] [2 2 2]], 
      :inclusion [[0 1 2] [1 1 1] [2 1 0]]}] 
@@ -92,6 +106,20 @@
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 1] [2 1 1]], 
+     :inclusion [[0 1 2] [1 1 1] [2 2 2]]} 
+#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 2 2] [2 2 2]], 
+     :inclusion [[0 1 2] [1 1 1] [2 2 2]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 1 1] [2 1 1]], 
+     :inclusion [[0 1 2] [1 1 2] [2 1 2]]} 
+#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 2 2] [2 2 2]], 
+     :inclusion [[0 1 2] [1 1 2] [2 1 2]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 1 1] [2 1 1]], 
      :inclusion [[0 1 2] [1 1 2] [2 2 1]]} 
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 2 2] [2 2 2]], 
@@ -127,7 +155,7 @@
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 1] [2 1 2]], 
-     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}      *
+     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}      
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 2] [2 2 2]], 
      :inclusion [[0 1 2] [1 1 1] [2 1 0]]}] 
@@ -137,7 +165,7 @@
      :inclusion [[0 1 2] [1 1 1] [2 1 0]]} 
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 2] [2 2 2]], 
-     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}]     *
+     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}]     
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 1] [2 1 2]], 
@@ -155,6 +183,20 @@
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 1] [2 1 2]], 
+     :inclusion [[0 1 2] [1 1 1] [2 2 2]]} 
+#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 1 2] [2 2 2]], 
+     :inclusion [[0 1 2] [1 1 1] [2 2 2]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 1 1] [2 1 2]], 
+     :inclusion [[0 1 2] [1 1 2] [2 1 2]]} 
+#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 1 2] [2 2 2]], 
+     :inclusion [[0 1 2] [1 1 2] [2 1 2]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 1 1] [2 1 2]], 
      :inclusion [[0 1 2] [1 1 2] [2 2 1]]} 
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 2] [2 2 2]], 
@@ -166,7 +208,6 @@
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 2] [2 2 2]], 
      :inclusion [[0 1 2] [1 1 1] [2 1 2]]}] 
-
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 1] [2 1 2]], 
      :inclusion [[0 1 2] [1 2 0] [2 0 1]]} 
@@ -189,72 +230,8 @@
      :inclusion [[0 1 2] [1 1 1] [2 1 1]]}] 
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 1] [2 2 2]], 
-     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}      *
-#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 1] [2 2 2]], 
-     :inclusion [[0 1 2] [1 1 1] [2 1 0]]}] 
-
-[#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 1] [2 2 2]], 
-     :inclusion [[0 1 2] [1 1 1] [2 1 1]]} 
-#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 1] [2 2 2]], 
-     :inclusion [[0 1 2] [1 2 2] [2 2 2]]}] 
-
-[#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 1] [2 2 2]], 
-     :inclusion [[0 1 2] [1 1 1] [2 1 2]]} 
-#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 1] [2 2 2]], 
-     :inclusion [[0 1 2] [1 1 2] [2 2 2]]}] 
-
-[#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 1] [2 2 2]], 
-     :inclusion [[0 1 2] [1 1 2] [2 2 1]]} 
-#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 1] [2 2 2]], 
-     :inclusion [[0 1 2] [1 2 1] [2 1 2]]}] 
-
-[#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 1] [2 2 2]], 
-     :inclusion [[0 1 2] [1 2 0] [2 0 1]]}]     ?
-
-[#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 2] [2 1 2]], 
-     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}      *
-#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 2] [2 1 2]], 
-     :inclusion [[0 1 2] [1 1 1] [2 1 0]]}] 
-
-[#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 2] [2 1 2]], 
-     :inclusion [[0 1 2] [1 1 1] [2 1 1]]} 
-#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 2] [2 1 2]], 
-     :inclusion [[0 1 2] [1 2 2] [2 2 2]]}] 
-
-[#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 2] [2 1 2]], 
-     :inclusion [[0 1 2] [1 1 1] [2 1 2]]} 
-#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 2] [2 1 2]], 
-     :inclusion [[0 1 2] [1 1 2] [2 2 2]]}] 
-
-[#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 2] [2 1 2]], 
-     :inclusion [[0 1 2] [1 1 2] [2 2 1]]} 
-#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 2] [2 1 2]], 
-     :inclusion [[0 1 2] [1 2 1] [2 1 2]]}] 
-
-[#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 2] [2 1 2]], 
-     :inclusion [[0 1 2] [1 2 0] [2 0 1]]}] 
-
-[#naipmoro.boundary_algebra.core.BoundaryAlgebra
-{:juxtaposition [[0 1 2] [1 1 2] [2 2 1]], 
-     :inclusion [[0 1 2] [1 0 2] [2 2 2]]}      *
+{:juxtaposition [[0 1 2] [1 1 2] [2 2 1]],      
+     :inclusion [[0 1 2] [1 0 2] [2 2 2]]} 
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 2 1] [2 1 2]], 
      :inclusion [[0 1 2] [1 1 1] [2 1 0]]}] 
@@ -279,6 +256,20 @@
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 2 1] [2 1 2]], 
      :inclusion [[0 1 2] [1 1 2] [2 2 2]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 1 2] [2 2 1]], 
+     :inclusion [[0 1 2] [1 1 1] [2 2 2]]} 
+#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 2 1] [2 1 2]], 
+     :inclusion [[0 1 2] [1 1 1] [2 2 2]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 1 2] [2 2 1]], 
+     :inclusion [[0 1 2] [1 1 2] [2 1 2]]} 
+#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 2 1] [2 1 2]], 
+     :inclusion [[0 1 2] [1 1 2] [2 1 2]]}] 
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 1 2] [2 2 1]], 
@@ -335,6 +326,14 @@
 #naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 2 0] [2 0 1]], 
      :inclusion [[0 1 2] [1 1 2] [2 2 2]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 2 0] [2 0 1]], 
+     :inclusion [[0 1 2] [1 1 1] [2 2 2]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1 2] [1 2 0] [2 0 1]], 
+     :inclusion [[0 1 2] [1 1 2] [2 1 2]]}] 
 
 [#naipmoro.boundary_algebra.core.BoundaryAlgebra
 {:juxtaposition [[0 1 2] [1 2 0] [2 0 1]], 

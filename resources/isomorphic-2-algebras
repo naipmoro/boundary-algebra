@@ -1,0 +1,24 @@
+[
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1] 
+                 [1 0]], 
+     :inclusion [[0 1] 
+                 [1 0]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1] 
+                 [1 0]], 
+     :inclusion [[0 1] 
+                 [1 1]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1] 
+                 [1 1]], 
+     :inclusion [[0 1] 
+                 [1 0]]}] 
+
+[#naipmoro.boundary_algebra.core.BoundaryAlgebra
+{:juxtaposition [[0 1] 
+                 [1 1]], 
+     :inclusion [[0 1] 
+                 [1 1]]}]]
