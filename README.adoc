@@ -1,0 +1,17 @@
+== Exercises in Boundary Logic
+:source-highlighter: highlight.js
+:stem:
+:math:
+
+This projects supplements
+https://github.com/naipmoro/boundary-algebra/blob/master/boundary-algebra.pdf[boundary-algebra.pdf]
+with code needed to investigate algebraic structures and prove various theorems about them.
+
+Every isomorphic group of algebras in
+'resources/isomorphic-boolean-4-boundaries' contains a boolean exemplar.
+[source,clojure]
+----
+(let [all-4-bools (file->obj (io/resource "isomorphic-boolean-4-boundaries"))]
+    (every? #(some boolean-exemplar? %) all-4-bools))
+;;=> true
+----

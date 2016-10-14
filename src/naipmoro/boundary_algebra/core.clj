@@ -50,7 +50,7 @@
           (conj classes yes)
           (recur (conj classes yes) no))))))
 
-(defn gray-code
+(defn ktuples
   "Returns all possible k-tuples from #{0, 1, ... , n-1}"
   [n k]
   (combo/selections (range n) k))
@@ -135,8 +135,8 @@
 (def upper-triangle (r/filter #(<= (first %) (second %))))
 
 (defn open-slot
-  [ttable]
-  (r/filter #(nil? (table-nth ttable (first %) (second %)))))
+  [template]
+  (r/filter #(nil? (table-nth template (first %) (second %)))))
 
 ;; (defn upper-triangle-slots-orig
 ;;   "Returns the 2d-indices of the open slots in the upper-triangle
@@ -170,7 +170,7 @@
   "Structure with empty nil slots"
   (fill [this rule] "Fill the slots according to a rule")
   (slots [this] "Return indices of empty slots")
-  (sels [this] "Selections of all possible slot values")
+  (ktups [this] "K-tuples of all possible slot values")
   (rule [this sel] "Mapping from slots to a selection of values"))
 
 (defrecord JuxtTemplate [template]
@@ -188,10 +188,10 @@
           n (count template)
           idxs (combo/cartesian-product (range 1 n) (range 1 n))]
       (r/reduce conj [] (c idxs))))
-  (sels [this]
+  (ktups [this]
     (let [n (count template)
           s (count (slots this))]
-      (gray-code n s)))
+      (ktuples n s)))
   (rule [this perm] (zipmap (slots this) perm)))
 
 (defrecord InclTemplate [template]
@@ -209,10 +209,10 @@
           n (count template)
           idxs (combo/cartesian-product (range 1 n) (range 1 n))]
       (r/reduce conj [] (c idxs))))
-  (sels [this]
+  (ktups [this]
     (let [n (count template)
           s (count (slots this))]
-      (gray-code n s)))
+      (ktuples n s)))
   (rule [this perm] (zipmap (slots this) perm)))
 
 (defprotocol Operation
@@ -413,8 +413,8 @@
             "The dimensions of the 2 matrices are not equal.")
     (let [m (m/matrix matrix)
           n (m/row-count m)
-          sels (combo/permutations (range 1 n))
-          permaps (map permutation->mapping sels)]
+          perms (combo/permutations (range 1 n))
+          permaps (map permutation->mapping perms)]
       (loop [pmaps permaps]
         (if-not (seq pmaps)
           false
@@ -434,8 +434,8 @@
           juxt (:juxtaposition algebra)
           juxt2 (:juxtaposition algebra2)
           n (m/row-count (:inclusion algebra))
-          sels (combo/permutations (range 1 n))
-          permaps (map permutation->mapping sels)]
+          perms (combo/permutations (range 1 n))
+          permaps (map permutation->mapping perms)]
       (loop [pmaps permaps]
         (if-not (seq pmaps)
           false
@@ -502,35 +502,18 @@
       t
       (recur (conj t (vec (cons i (repeat (dec k) nil)))) (inc i)))))
 
+
+
+
+
 (defn all-k-boundaries-orig
-  "Returns a vector of all legal boundary algebras of k elements,
-   grouped in isomorphic subvectors."
-  [k]
-  (let [temp (create-template k)
-        itemp (->InclTemplate temp)
-        jtemp (->JuxtTemplate temp)
-        ips (sels itemp)
-        jps (sels jtemp)
-        irules (map #(rule itemp %) ips)
-        jrules (map #(rule jtemp %) jps)
-        its (map #(fill itemp %) irules)
-        jts (map #(fill jtemp %) jrules)
-        iassocs (filter associative-orig? its)
-        jassocs (filter associative-orig? jts)
-        algs (for [j jassocs i iassocs]
-               (->BoundaryAlgebra j i))]
-    (isomorphs algs)))
-
-
-
-(defn all-k-boundaries
   "Returns a lazy seq of all legal boundary algebras of k elements."
   [k]
   (let [temp (create-template k)
         itemp (->InclTemplate temp)
         jtemp (->JuxtTemplate temp)
-        itups (sels itemp)
-        jtups (sels jtemp)
+        itups (ktups itemp)
+        jtups (ktups jtemp)
         irules (r/map #(rule itemp %))
         jrules (r/map #(rule jtemp %))
         its (r/map #(fill itemp %))
@@ -542,70 +525,64 @@
     (for [j jtables i itables]
                (->BoundaryAlgebra j i))))
 
-(defn all-isomorphic-k-boundaries
+(defn all-k-boundaries
+  "Returns a lazy seq of all legal boundary algebras of k elements."
+  [k]
+  (let [temp (create-template k)
+        itemp (->InclTemplate temp)
+        itups (ktups itemp)
+        irules (r/map #(rule itemp %))
+        its (r/map #(fill itemp %))
+        iassocs (r/filter associates?)
+        itables (into [] ((comp iassocs its irules) itups))
+        ;; jtables are just the commutative itables
+        jtables (into [] ((r/filter commutative?) itables))]
+    (for [j jtables i itables]
+               (->BoundaryAlgebra j i))))
+
+(defn isomorphic-k-boundaries
   "Returns a vector of all legal boundary algebras of k elements,
    grouped in isomorphic subvectors."
   [k]
   (isomorphs (all-k-boundaries k)))
 
-;; (defn juxt-table
-;;   "Creates a new JuxtTable"
-;;   [table]
-;;   {:pre [(square-table? table)]}
-;;   (->JuxtTable table))
+(defn boolean-boundaries
+  "Given a collection of boundaries, returns a vector
+   of the boolean boundaries."
+  [boundaries]
+  (into [] ((r/filter boolean?) boundaries)))
 
-;; (defn incl-table
-;;   "Creates a new InclTable"
-;;   [table]
-;;   {:pre [(square-table? table)]}
-;;   (->InclTable table))
+(defn juxt-exemplar?
+  "a juxt-exemplar is a jtable with [1,1]=1"
+  [jtable]
+  (= 1 (table-nth jtable 1 1)))
 
-(comment ;check that every jtable is commutative
+(defn incl-exemplar?
+  "an incl-exemplar is an itable with [1,1]=0"
+  [itable]
+  (= 0 (table-nth itable 1 1)))
 
+(defn boolean-exemplar?
+  "a boolean exemplar is a boolean boundary composed
+  of both a juxt-exemplar and an incl-exemplar"
+  [algebra]
+  (and (juxt-exemplar? (:juxtaposition algebra))
+       (incl-exemplar? (:inclusion algebra))))
+
+(comment 
+  ;check that every jtable is commutative
   (let [temp (->JuxtTemplate template-4j-bool)
-        ps (sels temp)
+        ps (ktups temp)
         rules (map #(rule temp %) ps)
         tables (for [r rules]
-                 (juxt-table (fill temp r)))]
+                 (m/matrix (fill temp r)))]
     (every? commutative? tables))
-
-  (let [temp (->InclTemplate template-3i)
-        ps (sels temp)
-        rules (map #(rule temp %) ps)
-        ;; ts (map #(fill temp %) rs)
-        ts (for [r rules]
-             (m/matrix (fill temp r)))
-        ass (filter associative? ts)
-        isos (isomorphs ass)])
-
-  (let [temp (->InclTemplate template-3i)
-        ps (sels temp)
-        rules (map #(rule temp %) ps)
-        ts (map #(fill temp %) rules)
-        ass (filter associative? ts)
-        ms (map m/matrix ass)
-        isos (isomorphs ms)]
-    )
-   ;; return all 3-boundary algebras
-  (let [itemp (->InclTemplate template-3i)
-        jtemp (->JuxtTemplate template-3j)
-        ips (sels itemp)
-        jps (sels jtemp)
-        irules (map #(rule itemp %) ips)
-        jrules (map #(rule jtemp %) jps)
-        its (map #(fill itemp %) irules)
-        jts (map #(fill jtemp %) jrules)
-        iassocs (filter associative? its)
-        jassocs (filter associative? jts)
-        algs (for [j jassocs i iassocs]
-               (->BoundaryAlgebra j i))]
-    (isomorphs algs))
 
   ;; return all group 3-boundaries
   (let [itemp (->InclTemplate template-3i)
         jtemp (->JuxtTemplate template-3j)
-        ips (sels itemp)
-        jps (sels jtemp)
+        ips (ktups itemp)
+        jps (ktups jtemp)
         irules (map #(rule itemp %) ips)
         jrules (map #(rule jtemp %) jps)
         its (map #(fill itemp %) irules)
@@ -615,6 +592,32 @@
         algs (for [j jassocs i iassocs]
                (->BoundaryAlgebra j i))]
     (isomorphs algs))
+
+  ;; Question1: does every isomorphic group of algebras in
+  ;; isomorphic-boolean-4-boundaries contain a boolean exemplar?
+  (let [all-4-bools (file->obj (io/resource "isomorphic-boolean-4-boundaries"))]
+    (every? #(some boolean-exemplar? %) all-4-bools))
+  ;;=> true
+
+  ;; Question2: does every isomorphic group of algebras in
+  ;; isomorphic-boolean-4-boundaries contain just one boolean exemplar?  
+  (let [all-4-bools (file->obj (io/resource "isomorphic-boolean-4-boundaries"))]
+    (every? #(= 1 (count (into [] ((r/filter boolean-exemplar?) %)))) all-4-bools))
+  ;;=> false
+
+  ;; get all exemplars from each isomorphic group
+  (let [all-4-bools (file->obj (io/resource "isomorphic-boolean-4-boundaries"))
+      exemps (r/reduce (fn [res v] (conj res (into [] ((r/filter boolean-exemplar?) v))))
+                     [] all-4-bools)]
+    (obj->file exemps "resources/isomorphic-exemplar-4-boundaries"))
+
+  ;; how many different juxt structures are there in 4-boundaries? 26
+  (let [exemps (file->obj (io/resource "isomorphic-exemplar-4-boundaries"))]
+    (set (map #(:juxtaposition (first %)) exemps)))
+
+  ;; how many different incl structures are there in 4-boundaries? 14
+  (let [exemps (file->obj (io/resource "isomorphic-exemplar-4-boundaries"))]
+    (set (map #(:inclusion (first %)) exemps)))
   
   );end comment
 
